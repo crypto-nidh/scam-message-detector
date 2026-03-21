@@ -13,6 +13,11 @@ body {
     position: relative;
 }
 
+/* Smooth theme transition */
+html {
+    transition: background 250ms ease, color 250ms ease;
+}
+
 /* Animated background pattern */
 body::before {
     content: '';
@@ -31,6 +36,44 @@ body::before {
     position: relative;
     z-index: 2;
 }
+
+/* Theme toggle button */
+.btn-theme-toggle {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.08);
+    color: #e6eef6;
+    padding: 8px 10px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+.btn-theme-toggle:hover { transform: scale(1.05); }
+
+/* LIGHT THEME OVERRIDES */
+.light-theme body {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #ffffff 100%);
+}
+.light-theme body::before {
+    background-image: radial-gradient(rgba(6, 95, 70, 0.02) 1px, transparent 1px);
+}
+.light-theme .gradient-header {
+    background: linear-gradient(120deg, #e9f8ff 0%, #e6f3ff 100%);
+    border-bottom-color: #38bdf8;
+}
+.light-theme .brand-icon i { color: #0369a1; }
+.light-theme h1 { background: linear-gradient(135deg, #0f172a, #1e293b); -webkit-background-clip: text; color: transparent; }
+.light-theme .header-subtitle { color: rgba(15, 23, 42, 0.7); }
+.light-theme .detector-card { background: #ffffff; border: 1px solid rgba(15,23,42,0.04); box-shadow: 0 8px 20px rgba(15,23,42,0.06); }
+.light-theme .lead-text { color: #0f172a; }
+.light-theme .btn-theme-toggle { border-color: rgba(15,23,42,0.06); color: #0f172a; }
+.light-theme .result-placeholder { background: #ffffff; }
+
+/* Dark theme specific tweaks (explicit) */
+.dark-theme .btn-theme-toggle { border-color: rgba(255,255,255,0.08); color: #e6eef6; }
+
 
 /* ========== MAIN CARD ========== */
 .detector-card {

@@ -205,6 +205,44 @@ document.addEventListener('DOMContentLoaded', function() {
     const clearBtn = document.getElementById('clearBtn');
     const messageInput = document.getElementById('scamMessage');
     const resultArea = document.getElementById('resultArea');
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+
+    // THEME: initialize from localStorage or system preference
+    function applyTheme(theme) {
+        document.documentElement.classList.remove('light-theme', 'dark-theme');
+        if (theme === 'light') {
+            document.documentElement.classList.add('light-theme');
+            themeIcon.className = 'bi bi-sun-fill';
+            themeToggle.setAttribute('aria-pressed', 'true');
+        } else {
+            document.documentElement.classList.add('dark-theme');
+            themeIcon.className = 'bi bi-moon-fill';
+            themeToggle.setAttribute('aria-pressed', 'false');
+        }
+    }
+
+    function loadTheme() {
+        const saved = localStorage.getItem('shield_theme');
+        if (saved === 'light' || saved === 'dark') return saved;
+        // Fallback to prefers-color-scheme
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) return 'light';
+        return 'dark';
+    }
+
+    // initialize theme on load
+    const initialTheme = loadTheme();
+    applyTheme(initialTheme);
+
+    // toggle handler
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function() {
+            const current = document.documentElement.classList.contains('light-theme') ? 'light' : 'dark';
+            const next = current === 'light' ? 'dark' : 'light';
+            applyTheme(next);
+            localStorage.setItem('shield_theme', next);
+        });
+    }
     
     // Detect scam button click
     detectBtn.addEventListener('click', function() {
