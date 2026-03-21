@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Optional: Allow Enter with Ctrl+Enter to detect? (nice UX)
+    
     messageInput.addEventListener('keydown', function(e) {
         if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
             e.preventDefault();
